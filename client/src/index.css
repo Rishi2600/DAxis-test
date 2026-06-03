@@ -1,0 +1,51 @@
+/* ──────────────────────────────────────────────────────────
+   DAxis — Industrial-Precision / Technical Elegance
+   Brand tokens from the PRD §8.2
+   ────────────────────────────────────────────────────────── */
+:root {
+  --primary: #0A1628;
+  --surface: #0F2040;
+  --accent: #FF6B2B;
+  --accent-secondary: #1E6FA5;
+  --surface-light: #F4F6F9;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0BEC5;
+  --success: #22C55E;
+  --error: #EF4444;
+
+  --text: #14171E;
+  --text-muted: #7C8595;
+  --line-soft: #E4E8EE;
+  --line: #D2D8E0;
+  --bg: #FAFBFC;
+  --card: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a { color: var(--accent-secondary); }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: 15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

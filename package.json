@@ -1,0 +1,23 @@
+{
+  "name": "daxis-stack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DAxis Engineering Consultancy — React (Vite) + Express + Postgres (Drizzle)",
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "build": "npm --workspace shared run build && npm --workspace server run build && npm --workspace client run build",
+    "db:generate": "npm --workspace server run db:generate",
+    "db:migrate": "npm --workspace server run db:migrate",
+    "db:studio": "npm --workspace server run db:studio"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
