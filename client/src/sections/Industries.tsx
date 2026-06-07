@@ -73,18 +73,20 @@ export default function Industries() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr auto",
+            gridTemplateColumns: "auto 1fr",
             gap: "2rem",
             alignItems: "start",
           }}
         >
-          {/* Image card */}
+          {/* Image card — fixed size so every image is identical */}
           <div
             style={{
-              borderRadius: "16px",
+              borderRadius: "12px",
               overflow: "hidden",
               position: "relative",
-              aspectRatio: "4/3",
+              width: "380px",
+              height: "260px",
+              flexShrink: 0,
               background: "#0F2040",
             }}
           >
@@ -95,6 +97,7 @@ export default function Industries() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                objectPosition: "center",
                 opacity: 0.6,
                 transition: "opacity 0.4s",
               }}
@@ -118,7 +121,7 @@ export default function Industries() {
                   marginBottom: "0.5rem",
                 }}
               >
-                {INDUSTRIES[active].num} OF 08
+              {INDUSTRIES[active].num} OF {String(INDUSTRIES.length).padStart(2, "0")}
               </div>
               <h3
                 style={{
