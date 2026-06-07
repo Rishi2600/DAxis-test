@@ -4,7 +4,7 @@ export default function Team() {
   return (
     <section
       id="team"
-      style={{ padding: "6rem 2rem", background: "#EBF3FA" }}
+      style={{ padding: "6rem 2rem", background: "#D6EAF8" }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {/* Header */}

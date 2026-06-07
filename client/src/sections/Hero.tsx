@@ -1,3 +1,5 @@
+import { LOGO_HERO_WATERMARK } from "../constants/logo";
+
 export default function Hero() {
 
   return (
@@ -49,6 +51,27 @@ export default function Hero() {
           pointerEvents: "none",
         }}
       />
+
+      {/* Watermark logo — very faint, right side background */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "2%",
+          transform: "translateY(-50%)",
+          width: "36%",
+          maxWidth: "400px",
+          opacity: 0.04,
+          pointerEvents: "none",
+          userSelect: "none",
+        }}
+      >
+        <img
+          src={LOGO_HERO_WATERMARK}
+          alt=""
+          style={{ width: "100%", height: "auto", filter: "brightness(10)" }}
+        />
+      </div>
 
       <div
         style={{

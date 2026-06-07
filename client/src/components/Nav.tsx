@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LOGO_NAV } from "../constants/logo";
 
-// All links including Contact — rendered in mobile menu and desktop center
 const NAV_LINKS = ["Home", "About", "Services", "Industries", "Team", "Contact"];
 
 export default function Nav() {
@@ -17,19 +17,25 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // Close drawer on route change
   useEffect(() => setMenuOpen(false), [location.pathname]);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   const handleNavClick = (label: string) => {
     if (label === "Contact") {
       navigate("/contact");
-      setMenuOpen(false);
-      return;
-    }
-    const id = label.toLowerCase();
-    if (!isHome) {
-      navigate("/", { state: { scrollTo: id } });
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      const id = label.toLowerCase();
+      if (!isHome) {
+        navigate("/", { state: { scrollTo: id } });
+      } else {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }
     }
     setMenuOpen(false);
   };
@@ -37,269 +43,337 @@ export default function Nav() {
   const NAV_HEIGHT = "80px";
 
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: scrolled ? "rgba(10,22,40,0.97)" : "rgba(10,22,40,0.70)",
-        backdropFilter: "blur(12px)",
-        borderBottom: scrolled
-          ? "1px solid rgba(255,107,43,0.2)"
-          : "1px solid transparent",
-        transition: "all 0.3s",
-        height: NAV_HEIGHT,
-        display: "grid",
-        // 3-column layout: logo | center links | right buttons
-        gridTemplateColumns: "1fr auto 1fr",
-        alignItems: "center",
-        padding: "0 2.5rem",
-      }}
-    >
-      {/* ── Left: Logo ── */}
-      <Link
-        to="/"
+    <>
+      {/* ── Nav bar ── */}
+      <nav
         style={{
-          textDecoration: "none",
-          display: "flex",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 200,
+          background: scrolled ? "rgba(10,22,40,0.97)" : "rgba(10,22,40,0.75)",
+          backdropFilter: "blur(12px)",
+          borderBottom: scrolled
+            ? "1px solid rgba(255,107,43,0.2)"
+            : "1px solid transparent",
+          transition: "background 0.3s, border-color 0.3s",
+          height: NAV_HEIGHT,
+          display: "grid",
+          gridTemplateColumns: "80px 1fr 80px",
           alignItems: "center",
-          gap: "10px",
-          justifySelf: "start",
+          padding: "0 2rem",
         }}
       >
-        <div
-          style={{
-            width: 34,
-            height: 34,
-            background: "linear-gradient(135deg, #FF6B2B, #1E6FA5)",
-            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-            flexShrink: 0,
-          }}
-        />
-        <span
-          style={{
-            fontFamily: "'Rajdhani', sans-serif",
-            fontWeight: 700,
-            fontSize: "1.25rem",
-            color: "#fff",
-            letterSpacing: "0.05em",
-          }}
-        >
-          DAXIS <span style={{ color: "#FF6B2B" }}>ENGINEERING</span>
-        </span>
-      </Link>
-
-      {/* ── Center: Nav links (desktop) ── */}
-      <div
-        className="nav-desktop"
-        style={{
-          display: "flex",
-          gap: "2rem",
-          alignItems: "center",
-        }}
-      >
-        {NAV_LINKS.map((label) => (
-          <button
-            key={label}
-            onClick={() => handleNavClick(label)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#B0BEC5",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "0.9rem",
-              cursor: "pointer",
-              transition: "color 0.2s",
-              letterSpacing: "0.03em",
-              padding: "0.25rem 0",
-            }}
-            onMouseEnter={(e) =>
-              ((e.target as HTMLElement).style.color = "#FF6B2B")
-            }
-            onMouseLeave={(e) =>
-              ((e.target as HTMLElement).style.color = "#B0BEC5")
-            }
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {/* ── Right: Action buttons (desktop) ── */}
-      <div
-        className="nav-desktop"
-        style={{
-          display: "flex",
-          gap: "0.75rem",
-          alignItems: "center",
-          justifySelf: "end",
-        }}
-      >
-        {/* Learn More → scrolls to About */}
+        {/* ── Left: Hamburger (always visible) ── */}
         <button
-          onClick={() => handleNavClick("About")}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Toggle menu"
           style={{
-            background: "transparent",
-            border: "1px solid rgba(255,255,255,0.25)",
+            background: "none",
+            border: "1px solid rgba(255,255,255,0.15)",
+            borderRadius: "6px",
             color: "#fff",
-            padding: "0.5rem 1.2rem",
-            borderRadius: "4px",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 500,
-            fontSize: "0.88rem",
-            letterSpacing: "0.04em",
-            cursor: "pointer",
-            transition: "border-color 0.2s, color 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = "#FF6B2B";
-            (e.currentTarget as HTMLElement).style.color = "#FF6B2B";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor =
-              "rgba(255,255,255,0.25)";
-            (e.currentTarget as HTMLElement).style.color = "#fff";
-          }}
-        >
-          Learn More
-        </button>
-
-        {/* Contact → /contact route */}
-        <Link
-          to="/contact"
-          style={{
-            background: "#FF6B2B",
-            color: "#fff",
-            padding: "0.5rem 1.2rem",
-            borderRadius: "4px",
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 600,
-            fontSize: "0.88rem",
-            letterSpacing: "0.04em",
-            textDecoration: "none",
-            transition: "background 0.2s",
-          }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#e55a1f")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#FF6B2B")
-          }
-        >
-          Contact
-        </Link>
-      </div>
-
-      {/* ── Hamburger (mobile only) ── */}
-      <button
-        className="nav-burger"
-        onClick={() => setMenuOpen((o) => !o)}
-        style={{
-          display: "none",
-          background: "none",
-          border: "none",
-          color: "#fff",
-          fontSize: "1.5rem",
-          cursor: "pointer",
-          justifySelf: "end",
-          padding: 0,
-          lineHeight: 1,
-        }}
-      >
-        {menuOpen ? "✕" : "☰"}
-      </button>
-
-      {/* ── Mobile dropdown ── */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "absolute",
-            top: NAV_HEIGHT,
-            left: 0,
-            right: 0,
-            background: "rgba(10,22,40,0.99)",
-            borderBottom: "1px solid rgba(255,107,43,0.2)",
-            padding: "0.5rem 0 1rem",
+            width: "40px",
+            height: "40px",
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "5px",
+            cursor: "pointer",
+            padding: 0,
+            transition: "border-color 0.2s",
+            justifySelf: "start",
+          }}
+          onMouseEnter={(e) =>
+            ((e.currentTarget as HTMLElement).style.borderColor = "#FF6B2B")
+          }
+          onMouseLeave={(e) =>
+            ((e.currentTarget as HTMLElement).style.borderColor =
+              "rgba(255,255,255,0.15)")
+          }
+        >
+          {/* Three lines → X when open */}
+          <span
+            style={{
+              display: "block",
+              width: "18px",
+              height: "2px",
+              background: "#fff",
+              borderRadius: "2px",
+              transition: "transform 0.3s, opacity 0.3s",
+              transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "18px",
+              height: "2px",
+              background: "#fff",
+              borderRadius: "2px",
+              transition: "opacity 0.3s",
+              opacity: menuOpen ? 0 : 1,
+            }}
+          />
+          <span
+            style={{
+              display: "block",
+              width: "18px",
+              height: "2px",
+              background: "#fff",
+              borderRadius: "2px",
+              transition: "transform 0.3s, opacity 0.3s",
+              transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+            }}
+          />
+        </button>
+
+        {/* ── Center: Logo ── */}
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
           }}
         >
-          {NAV_LINKS.map((label) => (
+          <img
+            src={LOGO_NAV}
+            alt="DAxis logo"
+            style={{ width: 36, height: 36, objectFit: "contain", flexShrink: 0 }}
+          />
+          <span
+            style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              fontWeight: 700,
+              fontSize: "1.2rem",
+              color: "#fff",
+              letterSpacing: "0.05em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            DAXIS <span style={{ color: "#FF6B2B" }}>ENGINEERING</span>
+          </span>
+        </Link>
+
+        {/* ── Right: Action buttons ── */}
+        <div
+          style={{
+            display: "flex",
+            gap: "0.6rem",
+            alignItems: "center",
+            justifySelf: "end",
+          }}
+        >
+          <button
+            onClick={() => handleNavClick("About")}
+            style={{
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.25)",
+              color: "#fff",
+              padding: "0.45rem 1rem",
+              borderRadius: "4px",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 500,
+              fontSize: "0.85rem",
+              letterSpacing: "0.03em",
+              cursor: "pointer",
+              transition: "border-color 0.2s, color 0.2s",
+              whiteSpace: "nowrap",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "#FF6B2B";
+              (e.currentTarget as HTMLElement).style.color = "#FF6B2B";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(255,255,255,0.25)";
+              (e.currentTarget as HTMLElement).style.color = "#fff";
+            }}
+          >
+            Learn More
+          </button>
+
+          <Link
+            to="/contact"
+            style={{
+              background: "#FF6B2B",
+              color: "#fff",
+              padding: "0.45rem 1rem",
+              borderRadius: "4px",
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 600,
+              fontSize: "0.85rem",
+              letterSpacing: "0.03em",
+              textDecoration: "none",
+              transition: "background 0.2s",
+              whiteSpace: "nowrap",
+            }}
+            onMouseEnter={(e) =>
+              ((e.currentTarget as HTMLElement).style.background = "#e55a1f")
+            }
+            onMouseLeave={(e) =>
+              ((e.currentTarget as HTMLElement).style.background = "#FF6B2B")
+            }
+          >
+            Contact
+          </Link>
+        </div>
+      </nav>
+
+      {/* ── Backdrop ── */}
+      <div
+        onClick={() => setMenuOpen(false)}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 198,
+          background: "rgba(6,15,30,0.65)",
+          backdropFilter: "blur(3px)",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "all" : "none",
+          transition: "opacity 0.3s ease",
+        }}
+      />
+
+      {/* ── Left drawer ── */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          bottom: 0,
+          zIndex: 199,
+          width: "300px",
+          background: "#060f1e",
+          borderRight: "1px solid rgba(255,107,43,0.15)",
+          transform: menuOpen ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+          display: "flex",
+          flexDirection: "column",
+          overflowY: "auto",
+        }}
+      >
+        {/* Drawer header */}
+        <div
+          style={{
+            height: "80px",
+            display: "flex",
+            alignItems: "center",
+            padding: "0 1.5rem",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            flexShrink: 0,
+          }}
+        >
+          <img
+            src={LOGO_NAV}
+            alt="DAxis logo"
+            style={{ width: 30, height: 30, objectFit: "contain", marginRight: "10px", flexShrink: 0 }}
+          />
+          <span
+            style={{
+              fontFamily: "'Rajdhani', sans-serif",
+              fontWeight: 700,
+              fontSize: "1rem",
+              color: "#fff",
+              letterSpacing: "0.05em",
+            }}
+          >
+            DAXIS <span style={{ color: "#FF6B2B" }}>ENGINEERING</span>
+          </span>
+        </div>
+
+        {/* Nav links */}
+        <nav style={{ flex: 1, padding: "1rem 0" }}>
+          {NAV_LINKS.map((label, i) => (
             <button
               key={label}
               onClick={() => handleNavClick(label)}
               style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "14px",
+                width: "100%",
                 background: "none",
                 border: "none",
-                borderBottom: "1px solid rgba(255,255,255,0.05)",
+                borderBottom: "1px solid rgba(255,255,255,0.04)",
                 color: "#B0BEC5",
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "1rem",
+                fontWeight: 500,
                 cursor: "pointer",
+                padding: "1rem 1.5rem",
                 textAlign: "left",
-                padding: "1rem 2rem",
-                transition: "background 0.15s, color 0.15s",
+                transition: "background 0.15s, color 0.15s, padding-left 0.15s",
+                // Stagger slide-in when menu opens
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? "translateX(0)" : "translateX(-12px)",
+                transitionDelay: menuOpen ? `${i * 0.04 + 0.1}s` : "0s",
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =
-                  "rgba(255,107,43,0.06)";
+                  "rgba(255,107,43,0.07)";
                 (e.currentTarget as HTMLElement).style.color = "#fff";
+                (e.currentTarget as HTMLElement).style.paddingLeft = "2rem";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.background = "none";
                 (e.currentTarget as HTMLElement).style.color = "#B0BEC5";
+                (e.currentTarget as HTMLElement).style.paddingLeft = "1.5rem";
               }}
             >
+              {/* Index number */}
+              <span
+                style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: "0.65rem",
+                  color: "#FF6B2B",
+                  opacity: 0.7,
+                  flexShrink: 0,
+                  width: "20px",
+                }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {label}
             </button>
           ))}
+        </nav>
 
-          {/* Action buttons row in mobile */}
-          <div
+        {/* Drawer footer */}
+        <div
+          style={{
+            padding: "1.5rem",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            flexShrink: 0,
+          }}
+        >
+          <p
             style={{
-              display: "flex",
-              gap: "0.75rem",
-              padding: "1rem 2rem 0.5rem",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.78rem",
+              color: "#37474f",
+              margin: "0 0 0.4rem",
             }}
           >
-            <button
-              onClick={() => handleNavClick("About")}
-              style={{
-                flex: 1,
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.2)",
-                color: "#fff",
-                padding: "0.7rem",
-                borderRadius: "4px",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.9rem",
-                cursor: "pointer",
-              }}
-            >
-              Learn More
-            </button>
-            <Link
-              to="/contact"
-              style={{
-                flex: 1,
-                background: "#FF6B2B",
-                color: "#fff",
-                padding: "0.7rem",
-                borderRadius: "4px",
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                textDecoration: "none",
-                textAlign: "center",
-              }}
-            >
-              Contact
-            </Link>
-          </div>
+            daxis.engg@gmail.com
+          </p>
+          <p
+            style={{
+              fontFamily: "'Space Mono', monospace",
+              fontSize: "0.7rem",
+              color: "#37474f",
+              margin: 0,
+            }}
+          >
+            +91-9910461833 · New Delhi
+          </p>
         </div>
-      )}
-    </nav>
+      </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { LOGO_NAV } from "../constants/logo";
 
 const FOOTER_LINKS = {
   Services: [
@@ -61,14 +62,10 @@ export default function Footer() {
                 marginBottom: "1rem",
               }}
             >
-              <div
-                style={{
-                  width: 28,
-                  height: 28,
-                  background: "linear-gradient(135deg, #FF6B2B, #1E6FA5)",
-                  clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                  flexShrink: 0,
-                }}
+              <img
+                src={LOGO_NAV}
+                alt="DAxis logo"
+                style={{ width: 30, height: 30, objectFit: "contain", flexShrink: 0 }}
               />
               <span
                 style={{

@@ -43,11 +43,6 @@ const globalStyles = `
     to   { opacity: 1; }
   }
 
-  @media (max-width: 768px) {
-    .nav-desktop { display: none !important; }
-    .nav-burger  { display: block !important; }
-  }
-
   @media (max-width: 480px) {
     .scroll-col { height: 420px !important; }
   }
