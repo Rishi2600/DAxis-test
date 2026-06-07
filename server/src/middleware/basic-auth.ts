@@ -17,7 +17,7 @@ export function basicAuth(req: Request, res: Response, next: NextFunction): void
   const [user, pass] = decoded.split(":");
 
   const adminUser = process.env.ADMIN_USER ?? "admin";
-  const adminPass = process.env.ADMIN_PASS ?? env.RESEND_API_KEY.slice(0, 12);
+  const adminPass = process.env.ADMIN_PASS ?? (env.RESEND_API_KEY ?? '').slice(0, 12);
 
   if (user === adminUser && pass === adminPass) {
     next();
