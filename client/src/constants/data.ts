@@ -155,3 +155,51 @@ export const TEAM_SOFTWARE = [
   "GIS / ArcGIS",
   "PDS",
 ];
+
+export const TEAM_MEMBERS = [
+  {
+    id: "sunil",
+    name: "Sunil Sharma",
+    title: "LEAD CONSULTANT",
+    bio: "20+ years of expertise in multi-disciplinary engineering design, GIS mapping, and project management across Oil & Gas, Power, and Infrastructure sectors. Served reputed national and international EPC clients.",
+    skills: ["AutoCAD", "Plant 3D", "E3D", "CadWorx", "GIS / ArcGIS", "PDS"],
+    hasPhoto: true,
+    linkedin: null,
+  },
+  {
+    id: "gaurav",
+    name: "Gaurav Bajaj",
+    title: "P.ENG — PROJECT MANAGER",
+    bio: "P. Eng. Designated Project Manager with 17+ years of experience delivering complex infrastructure and industrial projects across energy, transportation and regulated environments.",
+    skills: ["Project Management", "Infrastructure", "Industrial Projects", "P.Eng"],
+    hasPhoto: false,
+    linkedin: null,
+  },
+  {
+    id: "muneshwer",
+    name: "Muneshwer Sharma",
+    title: "PLANT LAYOUT & PIPING PROFESSIONAL",
+    bio: "Seasoned plant layout and piping professional with detailed knowledge and proven experience of more than 25 years with companies providing engineering services to chemical, petrochemical, refineries and power plants.",
+    skills: ["Plant Layout", "Piping Design", "Refineries", "Power Plants", "Petrochemical"],
+    hasPhoto: false,
+    linkedin: null,
+  },
+  {
+    id: "vm",
+    name: "VM Madhusoodanan",
+    title: "SR. LEAD PIPING DESIGNER",
+    bio: "Sr. Lead Piping Designer/Engineer with 28+ years of accomplished experience in detailed engineering and design of refinery and oil & gas projects, offshore and onshore piping systems including 25 years in the Middle East.",
+    skills: ["Piping Design", "Offshore", "Onshore", "Refinery", "Oil & Gas", "Middle East"],
+    hasPhoto: false,
+    linkedin: null,
+  },
+  {
+    id: "sompal",
+    name: "Sompal Singh",
+    title: "CAD DESIGNER & TRAINER",
+    bio: "Proficiency in preparing drawings and generating views using AutoCAD 2D & 3D. Provides training of AutoCAD to diploma mechanical engineering students of JK Board.",
+    skills: ["AutoCAD 2D", "AutoCAD 3D", "Drafting", "Training"],
+    hasPhoto: false,
+    linkedin: null,
+  },
+];
