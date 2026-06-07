@@ -74,8 +74,6 @@ export const enquirySchema = z.object({
     .trim()
     .max(500, "Message must be 500 characters or less")
     .nullable()
-    .optional()
-    .or(z.literal(""))
     .transform((v) => (v ? v : null)),
 });
 
