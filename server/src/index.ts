@@ -18,10 +18,11 @@ const app = express();
 /* ── Security & parsing middleware ──────────────────────────── */
 app.use(helmet());
 app.use(
-  cors({
-    origin: env.CORS_ORIGIN,
-    methods: ["GET", "POST", "PATCH"],
-    credentials: false,
+  cors
+    ({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 app.use(express.json({ limit: "16kb" })); // Tight limit — form payload is tiny
