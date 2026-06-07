@@ -17,7 +17,7 @@ export default function About() {
     <section
       id="about"
       ref={ref as React.RefObject<HTMLElement>}
-      style={{ padding: "6rem 2rem", background: "#F4F6F9" }}
+      style={{ padding: "6rem 2rem", background: "#D6EAF8" }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {/* Header */}
@@ -68,7 +68,7 @@ export default function About() {
             <div
               key={i}
               style={{
-                background: "#fff",
+                background: "#EBF3FA",
                 borderRadius: "12px",
                 border: "1px solid rgba(10,22,40,0.08)",
                 padding: "2rem",

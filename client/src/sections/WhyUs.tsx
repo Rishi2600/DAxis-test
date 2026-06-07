@@ -8,7 +8,7 @@ export default function WhyUs() {
     <section
       id="why"
       ref={ref as React.RefObject<HTMLElement>}
-      style={{ padding: "6rem 2rem", background: "#F4F6F9" }}
+      style={{ padding: "6rem 2rem", background: "#D6EAF8" }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
@@ -48,7 +48,7 @@ export default function WhyUs() {
             <div
               key={i}
               style={{
-                background: "#fff",
+                background: "#EBF3FA",
                 borderRadius: "12px",
                 border: "1px solid rgba(10,22,40,0.08)",
                 padding: "2rem",
@@ -67,9 +67,15 @@ export default function WhyUs() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-                {u.icon}
-              </div>
+              <div
+                style={{
+                  width: "36px",
+                  height: "3px",
+                  background: "linear-gradient(to right, #FF6B2B, #1E6FA5)",
+                  borderRadius: "2px",
+                  marginBottom: "1rem",
+                }}
+              />
               <h3
                 style={{
                   fontFamily: "'Rajdhani', sans-serif",

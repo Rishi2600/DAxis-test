@@ -11,7 +11,7 @@ export default function Testimonials() {
 
   return (
     <section
-      style={{ padding: "6rem 2rem", background: "#F4F6F9" }}
+      style={{ padding: "6rem 2rem", background: "#D6EAF8" }}
     >
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <h2
@@ -30,7 +30,7 @@ export default function Testimonials() {
 
         <div
           style={{
-            background: "#fff",
+            background: "#EBF3FA",
             borderRadius: "16px",
             border: "1px solid rgba(10,22,40,0.08)",
             padding: "3rem",

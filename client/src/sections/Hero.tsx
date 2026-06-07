@@ -1,8 +1,4 @@
-import { Link } from "react-router-dom";
-
 export default function Hero() {
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
@@ -61,7 +57,7 @@ export default function Hero() {
           maxWidth: "1200px",
           margin: "0 auto",
           padding: "0 2rem",
-          paddingTop: "80px",
+          paddingTop: "100px",
         }}
       >
         {/* Eyebrow */}
@@ -111,80 +107,13 @@ export default function Hero() {
             color: "#B0BEC5",
             maxWidth: "520px",
             lineHeight: 1.7,
-            marginBottom: "2.5rem",
+            marginBottom: "0",
             animation: "fadeInUp 0.6s 0.2s ease both",
           }}
         >
           Complete Solutions in Engineering Design, 3D Modeling &amp; Technical
           Manpower for Industrial and Infrastructure Projects.
         </p>
-
-        {/* CTAs */}
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-            flexWrap: "wrap",
-            animation: "fadeInUp 0.6s 0.3s ease both",
-          }}
-        >
-          <button
-            onClick={() => scrollTo("services")}
-            style={{
-              background: "#FF6B2B",
-              border: "none",
-              color: "#fff",
-              padding: "0.85rem 2rem",
-              borderRadius: "4px",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 600,
-              fontSize: "0.95rem",
-              cursor: "pointer",
-              letterSpacing: "0.04em",
-              transition: "transform 0.2s, background 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "#e55a1f";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "#FF6B2B";
-              (e.currentTarget as HTMLElement).style.transform = "none";
-            }}
-          >
-            Learn More
-          </button>
-
-          <Link
-            to="/contact"
-            style={{
-              background: "transparent",
-              border: "1px solid rgba(255,255,255,0.3)",
-              color: "#fff",
-              padding: "0.85rem 2rem",
-              borderRadius: "4px",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 500,
-              fontSize: "0.95rem",
-              cursor: "pointer",
-              letterSpacing: "0.04em",
-              textDecoration: "none",
-              transition: "border-color 0.2s, transform 0.2s",
-              display: "inline-flex",
-              alignItems: "center",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "#FF6B2B";
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
-              (e.currentTarget as HTMLElement).style.transform = "none";
-            }}
-          >
-            Contact Us →
-          </Link>
-        </div>
 
         {/* Stats bar */}
         <div

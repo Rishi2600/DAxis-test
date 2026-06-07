@@ -47,6 +47,10 @@ const globalStyles = `
     .nav-desktop { display: none !important; }
     .nav-burger  { display: block !important; }
   }
+
+  @media (max-width: 480px) {
+    .scroll-col { height: 420px !important; }
+  }
 `;
 
 export default globalStyles;

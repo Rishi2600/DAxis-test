@@ -2,7 +2,6 @@ export const API_BASE = "/api";
 
 export const SERVICES = [
   {
-    icon: "⚙️",
     title: "Engineering Design & Drafting",
     items: [
       "2D Drafting & Detailing",
@@ -13,7 +12,6 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "🗺️",
     title: "Geospatial & Infrastructure Mapping",
     items: [
       "GIS Mapping & Data Digitization",
@@ -22,7 +20,6 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "🏗️",
     title: "Multi-Disciplinary Engineering",
     items: [
       "Civil & Structural Engineering",
@@ -32,7 +29,6 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "🔧",
     title: "Fabrication & Shop Drawings",
     items: [
       "Structural Steel Detailing",
@@ -42,7 +38,6 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "📋",
     title: "Project Management Consultancy",
     items: [
       "Project Scheduling & Planning",
@@ -52,7 +47,6 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "👷",
     title: "Technical Manpower Supply",
     items: [
       "CAD Operators & Designers",
@@ -101,27 +95,22 @@ export const CLIENTS = [
 
 export const USPS = [
   {
-    icon: "🎯",
     title: "20+ Years Expertise",
     desc: "Deep domain knowledge across oil & gas, power, and infrastructure sectors.",
   },
   {
-    icon: "🏆",
     title: "100% Quality Delivery",
     desc: "ISO-aligned QA processes ensuring accuracy on every deliverable.",
   },
   {
-    icon: "⏱️",
     title: "On-Time Guarantee",
     desc: "Structured workflows and dedicated teams that never miss a deadline.",
   },
   {
-    icon: "🌐",
     title: "360° Solutions",
     desc: "From concept to as-built — complete engineering lifecycle support.",
   },
   {
-    icon: "💰",
     title: "Cost-Effective Offshore",
     desc: "World-class engineering at highly competitive Indian pricing.",
   },

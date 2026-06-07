@@ -7,7 +7,7 @@ export default function Clients() {
     <section
       style={{
         padding: "4rem 0",
-        background: "#fff",
+        background: "#EBF3FA",
         overflow: "hidden",
       }}
     >

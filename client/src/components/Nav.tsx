@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const NAV_LINKS = ["Home", "About", "Services", "Industries", "Team"];
+// All links including Contact — rendered in mobile menu and desktop center
+const NAV_LINKS = ["Home", "About", "Services", "Industries", "Team", "Contact"];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,19 +17,24 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => setMenuOpen(false), [location.pathname]);
 
   const handleNavClick = (label: string) => {
+    if (label === "Contact") {
+      navigate("/contact");
+      setMenuOpen(false);
+      return;
+    }
     const id = label.toLowerCase();
     if (!isHome) {
-      // Navigate home then scroll after mount
       navigate("/", { state: { scrollTo: id } });
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
     setMenuOpen(false);
   };
+
+  const NAV_HEIGHT = "80px";
 
   return (
     <nav
@@ -44,19 +50,29 @@ export default function Nav() {
           ? "1px solid rgba(255,107,43,0.2)"
           : "1px solid transparent",
         transition: "all 0.3s",
-        padding: "0 2rem",
-        display: "flex",
+        height: NAV_HEIGHT,
+        display: "grid",
+        // 3-column layout: logo | center links | right buttons
+        gridTemplateColumns: "1fr auto 1fr",
         alignItems: "center",
-        justifyContent: "space-between",
-        height: "64px",
+        padding: "0 2.5rem",
       }}
     >
-      {/* Logo */}
-      <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
+      {/* ── Left: Logo ── */}
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          justifySelf: "start",
+        }}
+      >
         <div
           style={{
-            width: 32,
-            height: 32,
+            width: 34,
+            height: 34,
             background: "linear-gradient(135deg, #FF6B2B, #1E6FA5)",
             clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
             flexShrink: 0,
@@ -66,7 +82,7 @@ export default function Nav() {
           style={{
             fontFamily: "'Rajdhani', sans-serif",
             fontWeight: 700,
-            fontSize: "1.2rem",
+            fontSize: "1.25rem",
             color: "#fff",
             letterSpacing: "0.05em",
           }}
@@ -75,10 +91,14 @@ export default function Nav() {
         </span>
       </Link>
 
-      {/* Desktop links */}
+      {/* ── Center: Nav links (desktop) ── */}
       <div
         className="nav-desktop"
-        style={{ display: "flex", gap: "2rem", alignItems: "center" }}
+        style={{
+          display: "flex",
+          gap: "2rem",
+          alignItems: "center",
+        }}
       >
         {NAV_LINKS.map((label) => (
           <button
@@ -93,7 +113,7 @@ export default function Nav() {
               cursor: "pointer",
               transition: "color 0.2s",
               letterSpacing: "0.03em",
-              padding: 0,
+              padding: "0.25rem 0",
             }}
             onMouseEnter={(e) =>
               ((e.target as HTMLElement).style.color = "#FF6B2B")
@@ -105,17 +125,58 @@ export default function Nav() {
             {label}
           </button>
         ))}
+      </div>
 
+      {/* ── Right: Action buttons (desktop) ── */}
+      <div
+        className="nav-desktop"
+        style={{
+          display: "flex",
+          gap: "0.75rem",
+          alignItems: "center",
+          justifySelf: "end",
+        }}
+      >
+        {/* Learn More → scrolls to About */}
+        <button
+          onClick={() => handleNavClick("About")}
+          style={{
+            background: "transparent",
+            border: "1px solid rgba(255,255,255,0.25)",
+            color: "#fff",
+            padding: "0.5rem 1.2rem",
+            borderRadius: "4px",
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 500,
+            fontSize: "0.88rem",
+            letterSpacing: "0.04em",
+            cursor: "pointer",
+            transition: "border-color 0.2s, color 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = "#FF6B2B";
+            (e.currentTarget as HTMLElement).style.color = "#FF6B2B";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor =
+              "rgba(255,255,255,0.25)";
+            (e.currentTarget as HTMLElement).style.color = "#fff";
+          }}
+        >
+          Learn More
+        </button>
+
+        {/* Contact → /contact route */}
         <Link
           to="/contact"
           style={{
             background: "#FF6B2B",
             color: "#fff",
-            padding: "0.45rem 1.1rem",
+            padding: "0.5rem 1.2rem",
             borderRadius: "4px",
             fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 500,
-            fontSize: "0.85rem",
+            fontWeight: 600,
+            fontSize: "0.88rem",
             letterSpacing: "0.04em",
             textDecoration: "none",
             transition: "background 0.2s",
@@ -127,11 +188,11 @@ export default function Nav() {
             ((e.currentTarget as HTMLElement).style.background = "#FF6B2B")
           }
         >
-          Get a Quote
+          Contact
         </Link>
       </div>
 
-      {/* Hamburger */}
+      {/* ── Hamburger (mobile only) ── */}
       <button
         className="nav-burger"
         onClick={() => setMenuOpen((o) => !o)}
@@ -142,25 +203,27 @@ export default function Nav() {
           color: "#fff",
           fontSize: "1.5rem",
           cursor: "pointer",
+          justifySelf: "end",
+          padding: 0,
+          lineHeight: 1,
         }}
       >
         {menuOpen ? "✕" : "☰"}
       </button>
 
-      {/* Mobile dropdown */}
+      {/* ── Mobile dropdown ── */}
       {menuOpen && (
         <div
           style={{
             position: "absolute",
-            top: "64px",
+            top: NAV_HEIGHT,
             left: 0,
             right: 0,
-            background: "rgba(10,22,40,0.98)",
-            padding: "1rem 2rem 1.5rem",
+            background: "rgba(10,22,40,0.99)",
+            borderBottom: "1px solid rgba(255,107,43,0.2)",
+            padding: "0.5rem 0 1rem",
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
-            borderBottom: "1px solid rgba(255,107,43,0.2)",
           }}
         >
           {NAV_LINKS.map((label) => (
@@ -170,33 +233,71 @@ export default function Nav() {
               style={{
                 background: "none",
                 border: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
                 color: "#B0BEC5",
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "1rem",
                 cursor: "pointer",
                 textAlign: "left",
-                padding: "0.25rem 0",
+                padding: "1rem 2rem",
+                transition: "background 0.15s, color 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  "rgba(255,107,43,0.06)";
+                (e.currentTarget as HTMLElement).style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background = "none";
+                (e.currentTarget as HTMLElement).style.color = "#B0BEC5";
               }}
             >
               {label}
             </button>
           ))}
-          <Link
-            to="/contact"
+
+          {/* Action buttons row in mobile */}
+          <div
             style={{
-              background: "#FF6B2B",
-              color: "#fff",
-              padding: "0.7rem 1.1rem",
-              borderRadius: "4px",
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 600,
-              fontSize: "0.9rem",
-              textDecoration: "none",
-              textAlign: "center",
+              display: "flex",
+              gap: "0.75rem",
+              padding: "1rem 2rem 0.5rem",
             }}
           >
-            Get a Quote
-          </Link>
+            <button
+              onClick={() => handleNavClick("About")}
+              style={{
+                flex: 1,
+                background: "transparent",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#fff",
+                padding: "0.7rem",
+                borderRadius: "4px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.9rem",
+                cursor: "pointer",
+              }}
+            >
+              Learn More
+            </button>
+            <Link
+              to="/contact"
+              style={{
+                flex: 1,
+                background: "#FF6B2B",
+                color: "#fff",
+                padding: "0.7rem",
+                borderRadius: "4px",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600,
+                fontSize: "0.9rem",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              Contact
+            </Link>
+          </div>
         </div>
       )}
     </nav>
