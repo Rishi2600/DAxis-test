@@ -51,22 +51,19 @@ export const enquirySchema = z.object({
     .string()
     .trim()
     .max(150, "Company name is too long")
-    .optional()
-    .or(z.literal(""))
+    .nullable()
     .transform((v) => (v ? v : null)),
 
   serviceRequired: z
     .enum(SERVICE_OPTIONS)
-    .optional()
-    .or(z.literal(""))
+    .nullable()
     .transform((v) => (v ? v : null)),
 
   city: z
     .string()
     .trim()
     .max(80, "City name is too long")
-    .optional()
-    .or(z.literal(""))
+    .nullable()
     .transform((v) => (v ? v : null)),
 
   message: z
