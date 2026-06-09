@@ -34,7 +34,9 @@ function validate(form: FormState): Partial<Record<keyof FormState, string>> {
     e.email = "Valid email required";
   if (!form.phone || !/^[6-9]\d{9}$/.test(form.phone.trim()))
     e.phone = "Valid 10-digit Indian phone number required";
-  if (form.message && form.message.length > 500)
+  if (!form.message || form.message.trim().length === 0)
+    e.message = "Message is required";
+  else if (form.message.length > 500)
     e.message = "Max 500 characters";
   return e;
 }
@@ -459,6 +461,7 @@ export default function Contact() {
               {/* Message */}
               <div>
                 <FieldLabel
+                  required
                   extra={
                     <span
                       style={{
