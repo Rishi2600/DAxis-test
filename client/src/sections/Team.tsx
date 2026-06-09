@@ -1,8 +1,28 @@
 import { TEAM_MEMBERS } from "../constants/data";
-import { PHOTO_SUNIL } from "../constants/logo";
+import {
+  PHOTO_SUNIL,
+  PHOTO_HIMADRI,
+  PHOTO_SOMPAL,
+  PHOTO_MUKESH,
+  PHOTO_HP_ROY,
+  PHOTO_JAGDISH,
+  PHOTO_SANJIV,
+  PHOTO_GAURAV,
+  PHOTO_MUNESHWER,
+  PHOTO_VM,
+} from "../constants/logo";
 
 const PHOTOS: Record<string, string> = {
-  sunil: PHOTO_SUNIL,
+  sunil:     PHOTO_SUNIL,
+  himadri:   PHOTO_HIMADRI,
+  sompal:    PHOTO_SOMPAL,
+  mukesh:    PHOTO_MUKESH,
+  hp_roy:    PHOTO_HP_ROY,
+  jagdish:   PHOTO_JAGDISH,
+  sanjiv:    PHOTO_SANJIV,
+  gaurav:    PHOTO_GAURAV,
+  muneshwer: PHOTO_MUNESHWER,
+  vm:        PHOTO_VM,
 };
 
 function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
@@ -151,7 +171,7 @@ export default function Team() {
       <style>{`
         @keyframes teamScrollRight {
           0%   { transform: translateX(0); }
-          100% { transform: translateX(calc(-560px * 5 - 1.5rem * 5)); }
+          100% { transform: translateX(calc(-560px * 10 - 1.5rem * 10)); }
         }
         .team-track {
           display: flex;
