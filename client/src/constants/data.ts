@@ -1,5 +1,4 @@
-//@ts-ignore
-export const API_BASE = `${import.meta.env.VITE_API_URL || ""}/api`;
+export const API_BASE = "/api";
 
 export const SERVICES = [
   {
@@ -81,17 +80,28 @@ export const INDUSTRY_IMAGES = [
 ];
 
 export const CLIENTS = [
-  "L&T Engineering",
-  "NTPC Limited",
-  "ONGC",
-  "GAIL India",
-  "BPCL",
-  "Power Grid Corp",
-  "Tata Projects",
-  "Adani Group",
-  "Shapoorji Pallonji",
-  "HPCL",
-  "Engineers India Ltd",
+  "Ion Exchange",
+  "Tractable",
+  "SKB & RAD",
+  "Triveni",
+  "Shraddha Utilities Pvt. Ltd.",
+  "OJASVEE INTELLIMATION",
+  "MANJUGHOSH ENGINEERING SERVICE",
+  "Equipment Pro",
+  "Niox Energy",
+  "Trupti Cement Products",
+  "Veolia",
+  "Maxwell",
+  "Driplex Water Engineering Ltd",
+  "Egis",
+  "DJB",
+  "L&T",
+  "JJM",
+  "NTPC",
+  "Memrain India",
+  "Pracon India",
+  "Bonace Engineer Pvt Ltd",
+  "Techbro",
 ];
 
 export const USPS = [
