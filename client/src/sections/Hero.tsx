@@ -97,9 +97,10 @@ export default function Hero() {
           <span
             style={{
               fontFamily: "'Space Mono', monospace",
-              fontSize: "0.75rem",
+              fontSize: "1.1rem",
               color: "#FF6B2B",
-              letterSpacing: "0.3em",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
             }}
           >
             ENGINEERING EXCELLENCE
@@ -191,36 +192,6 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "8px",
-          animation: "bounce 2s infinite",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'Space Mono', monospace",
-            fontSize: "0.65rem",
-            color: "#B0BEC5",
-            letterSpacing: "0.2em",
-          }}
-        >
-          SCROLL
-        </span>
-        <div
-          style={{
-            width: "1px",
-            height: "40px",
-            background: "linear-gradient(to bottom, #FF6B2B, transparent)",
-          }}
-        />
-      </div>
     </section>
   );
 }

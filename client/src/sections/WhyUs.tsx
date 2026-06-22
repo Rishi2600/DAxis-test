@@ -15,9 +15,10 @@ export default function WhyUs() {
           <span
             style={{
               fontFamily: "'Space Mono', monospace",
-              fontSize: "0.7rem",
-              color: "#FF6B2B",
-              letterSpacing: "0.3em",
+              fontSize: "1.25rem",
+              color: "#0A1628",
+              fontWeight: 700,
+              letterSpacing: "0.05em",
               display: "block",
               marginBottom: "0.75rem",
             }}

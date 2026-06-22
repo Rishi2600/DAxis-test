@@ -65,7 +65,7 @@ export default function Footer() {
               <img
                 src={LOGO_NAV}
                 alt="DAxis logo"
-                style={{ width: 30, height: 30, objectFit: "contain", flexShrink: 0 }}
+                style={{ width: 40, height: 40, objectFit: "contain", flexShrink: 0 }}
               />
               <span
                 style={{

@@ -39,9 +39,10 @@ export default function Industries() {
           <span
             style={{
               fontFamily: "'Space Mono', monospace",
-              fontSize: "0.7rem",
+              fontSize: "1.1rem",
               color: "#FF6B2B",
-              letterSpacing: "0.3em",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
               display: "block",
               marginBottom: "0.75rem",
             }}

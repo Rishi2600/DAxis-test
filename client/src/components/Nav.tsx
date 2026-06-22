@@ -130,34 +130,22 @@ export default function Nav() {
           />
         </button>
 
-        {/* ── Center: Logo ── */}
+        {/* ── Center column: Logo, shifted toward left ── */}
         <Link
           to="/"
           style={{
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
+            justifyContent: "flex-start",
+            paddingLeft: "1.5rem",
           }}
         >
           <img
             src={LOGO_NAV}
-            alt="DAxis logo"
-            style={{ width: 36, height: 36, objectFit: "contain", flexShrink: 0 }}
+            alt="DAxis Engineering logo"
+            style={{ width: 52, height: 52, objectFit: "contain", flexShrink: 0 }}
           />
-          <span
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.2rem",
-              color: "#fff",
-              letterSpacing: "0.05em",
-              whiteSpace: "nowrap",
-            }}
-          >
-            DAXIS <span style={{ color: "#FF6B2B" }}>ENGINEERING</span>
-          </span>
         </Link>
 
         {/* ── Right: Action buttons ── */}
@@ -272,7 +260,7 @@ export default function Nav() {
           <img
             src={LOGO_NAV}
             alt="DAxis logo"
-            style={{ width: 30, height: 30, objectFit: "contain", marginRight: "10px", flexShrink: 0 }}
+            style={{ width: 40, height: 40, objectFit: "contain", marginRight: "10px", flexShrink: 0 }}
           />
           <span
             style={{
