@@ -1,5 +1,4 @@
-//@ts-ignore
-export const API_BASE = `${import.meta.env.VITE_API_URL || ""}/api`;
+export const API_BASE = "/api";
 
 export const SERVICES = [
   {
@@ -59,26 +58,17 @@ export const SERVICES = [
 ];
 
 export const INDUSTRIES = [
-  { num: "01", label: "Water & Utilities" },
-  { num: "02", label: "Oil & Gas" },
-  { num: "03", label: "Petrochemical" },
-  { num: "04", label: "Power Plants" },
-  { num: "05", label: "Infrastructure & Roads" },
-  { num: "06", label: "Municipal & Urban Development" },
-  { num: "07", label: "Industrial Facilities" },
-  { num: "08", label: "Environmental & Wastewater" },
+  { num: "01", label: "Manpower Services" },
+  { num: "02", label: "Mechanical, Electrical & Plumbing" },
+  { num: "03", label: "Sewage Treatment Plant" },
+  { num: "04", label: "Building" },
+  { num: "05", label: "Power Plant" },
+  { num: "06", label: "Petrochemical Plants" },
+  { num: "07", label: "Oil & Gas Plant" },
 ];
 
-export const INDUSTRY_IMAGES = [
-  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=60", // Water & Utilities
-  "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=60", // Oil & Gas
-  "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=800&q=60", // Petrochemical
-  "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=60", // Power Plants
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=60", // Infrastructure & Roads
-  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=60", // Municipal & Urban Development
-  "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=60", // Industrial Facilities
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60", // Environmental & Wastewater
-];
+// Industry images are now imported directly from constants/logo.ts
+// (INDUSTRY_IMG_MANPOWER, INDUSTRY_IMG_MEP, etc.) and referenced in Industries.tsx
 
 export const CLIENTS = [
   "Ion Exchange",

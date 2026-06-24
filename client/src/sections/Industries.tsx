@@ -1,5 +1,24 @@
 import { useState } from "react";
-import { INDUSTRIES, INDUSTRY_IMAGES } from "../constants/data";
+import { INDUSTRIES } from "../constants/data";
+import {
+  INDUSTRY_IMG_MANPOWER,
+  INDUSTRY_IMG_MEP,
+  INDUSTRY_IMG_SEWAGE,
+  INDUSTRY_IMG_BUILDING,
+  INDUSTRY_IMG_POWER_PLANT,
+  INDUSTRY_IMG_PETROCHEMICAL,
+  INDUSTRY_IMG_OIL_GAS,
+} from "../constants/logo";
+
+const INDUSTRY_IMAGES = [
+  INDUSTRY_IMG_MANPOWER,
+  INDUSTRY_IMG_MEP,
+  INDUSTRY_IMG_SEWAGE,
+  INDUSTRY_IMG_BUILDING,
+  INDUSTRY_IMG_POWER_PLANT,
+  INDUSTRY_IMG_PETROCHEMICAL,
+  INDUSTRY_IMG_OIL_GAS,
+];
 
 export default function Industries() {
   const [active, setActive] = useState(0);
