@@ -45,6 +45,30 @@ export default function Industries() {
         }}
       />
 
+      {/* Faded background image — same as active card's image, large & subtle */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `url(${INDUSTRY_IMAGES[active]})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.08,
+          transition: "opacity 0.6s ease",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Darken overlay so text stays readable over the faded photo */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(15,32,64,0.9) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
       <div
         style={{
           position: "relative",
@@ -141,7 +165,7 @@ export default function Industries() {
                   marginBottom: "0.5rem",
                 }}
               >
-              {INDUSTRIES[active].num} OF {String(INDUSTRIES.length).padStart(2, "0")}
+                {INDUSTRIES[active].num} OF {String(INDUSTRIES.length).padStart(2, "0")}
               </div>
               <h3
                 style={{
@@ -164,7 +188,7 @@ export default function Industries() {
             </div>
           </div>
 
-          {/* List panel */}
+          {/* List panel — no up/down buttons, just clickable rows */}
           <div
             style={{
               display: "flex",
@@ -173,33 +197,6 @@ export default function Industries() {
               minWidth: "220px",
             }}
           >
-            {/* Up arrow */}
-            <button
-              onClick={() => setActive((a) => Math.max(0, a - 1))}
-              style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#fff",
-                borderRadius: "50%",
-                width: "40px",
-                height: "40px",
-                cursor: "pointer",
-                marginBottom: "0.5rem",
-                fontSize: "1rem",
-                transition: "background 0.2s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.background =
-                  "rgba(255,107,43,0.2)")
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.background =
-                  "rgba(255,255,255,0.06)")
-              }
-            >
-              ↑
-            </button>
-
             {INDUSTRIES.map((ind, i) => (
               <button
                 key={i}
@@ -220,16 +217,6 @@ export default function Industries() {
                   width: "100%",
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "'Space Mono', monospace",
-                    fontSize: "0.65rem",
-                    color: active === i ? "#FF6B2B" : "#546e7a",
-                    flexShrink: 0,
-                  }}
-                >
-                  {ind.num}
-                </span>
                 <span
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
@@ -253,35 +240,6 @@ export default function Industries() {
                 )}
               </button>
             ))}
-
-            {/* Down arrow */}
-            <button
-              onClick={() =>
-                setActive((a) => Math.min(INDUSTRIES.length - 1, a + 1))
-              }
-              style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#fff",
-                borderRadius: "50%",
-                width: "40px",
-                height: "40px",
-                cursor: "pointer",
-                marginTop: "0.5rem",
-                fontSize: "1rem",
-                transition: "background 0.2s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.background =
-                  "rgba(255,107,43,0.2)")
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.background =
-                  "rgba(255,255,255,0.06)")
-              }
-            >
-              ↓
-            </button>
           </div>
         </div>
       </div>

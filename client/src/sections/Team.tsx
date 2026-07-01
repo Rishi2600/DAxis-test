@@ -31,21 +31,18 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
   return (
     <div
       style={{
-        background: "linear-gradient(135deg, #0A1628, #0F2040)",
+        background: "linear-gradient(160deg, #0d1f3c, #0F2040)",
         borderRadius: "14px",
-        padding: "1.75rem",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
         border: "1px solid rgba(30,111,165,0.2)",
-        width: "560px",
+        width: "220px",
         flexShrink: 0,
+        overflow: "hidden",
         transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
+        textAlign: "center",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,107,43,0.4)";
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          "0 8px 32px rgba(255,107,43,0.1)";
+        (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(255,107,43,0.1)";
         (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
       }}
       onMouseLeave={(e) => {
@@ -54,116 +51,104 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
         (e.currentTarget as HTMLElement).style.transform = "none";
       }}
     >
-      {/* Top row — avatar + name + title */}
-      <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      {/* Image — full width, square crop */}
+      <div
+        style={{
+          width: "100%",
+          height: "200px",
+          overflow: "hidden",
+          background: "linear-gradient(135deg, #1E6FA5, #0A1628)",
+        }}
+      >
         {photo ? (
           <img
             src={photo}
             alt={member.name}
             style={{
-              width: "64px",
-              height: "64px",
-              borderRadius: "50%",
+              width: "100%",
+              height: "100%",
               objectFit: "cover",
-              flexShrink: 0,
-              border: "2px solid rgba(255,107,43,0.45)",
+              objectPosition: "center top",
+              display: "block",
             }}
           />
         ) : (
           <div
             style={{
-              width: "64px",
-              height: "64px",
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #1E6FA5, #0A1628)",
+              width: "100%",
+              height: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "1.3rem",
+              fontSize: "2.5rem",
               color: "#fff",
-              flexShrink: 0,
-              border: "2px solid rgba(30,111,165,0.35)",
+              opacity: 0.6,
             }}
           >
             {member.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
           </div>
         )}
-
-        <div style={{ minWidth: 0 }}>
-          <h3
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.05rem",
-              color: "#fff",
-              margin: 0,
-            }}
-          >
-            {member.name}
-          </h3>
-          <div
-            style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: "0.58rem",
-              color: "#FF6B2B",
-              letterSpacing: "0.1em",
-              marginTop: "0.25rem",
-            }}
-          >
-            {member.title}
-          </div>
-        </div>
       </div>
 
-      {/* Divider */}
-      <div
-        style={{
-          height: "1px",
-          background: "linear-gradient(to right, rgba(255,107,43,0.3), transparent)",
-        }}
-      />
+      {/* Details */}
+      <div style={{ padding: "1.1rem 1rem 1.25rem" }}>
+        {/* Name */}
+        <h3
+          style={{
+            fontFamily: "'Rajdhani', sans-serif",
+            fontWeight: 700,
+            fontSize: "1rem",
+            color: "#fff",
+            margin: "0 0 0.3rem",
+            lineHeight: 1.2,
+          }}
+        >
+          {member.name}
+        </h3>
 
-      {/* Bio */}
-      <p
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: "0.82rem",
-          color: "#B0BEC5",
-          lineHeight: 1.65,
-          margin: 0,
-          flex: 1,
-        }}
-      >
-        {member.bio}
-      </p>
+        {/* Experience */}
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "1.1rem",
+            color: "#FF6B2B",
+            letterSpacing: "0.05em",
+            marginBottom: "0.35rem",
+          }}
+        >
+          {member.experience}
+        </div>
 
-      {/* Skill badges */}
-      <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
-        {member.skills.map((s) => (
-          <span
-            key={s}
-            style={{
-              fontFamily: "'Space Mono', monospace",
-              fontSize: "0.58rem",
-              background: "rgba(30,111,165,0.18)",
-              color: "#1E6FA5",
-              padding: "0.22rem 0.55rem",
-              borderRadius: "4px",
-              border: "1px solid rgba(30,111,165,0.25)",
-              whiteSpace: "nowrap" as const,
-            }}
-          >
-            {s}
-          </span>
-        ))}
+        {/* Divider */}
+        <div
+          style={{
+            width: "32px",
+            height: "2px",
+            background: "linear-gradient(to right, #FF6B2B, #1E6FA5)",
+            borderRadius: "2px",
+            margin: "0.4rem auto",
+          }}
+        />
+
+        {/* Designation */}
+        <div
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "0.75rem",
+            color: "#B0BEC5",
+            lineHeight: 1.4,
+            marginTop: "0.35rem",
+          }}
+        >
+          {member.title}
+        </div>
       </div>
     </div>
   );
 }
 
 export default function Team() {
-  // Triple for a seamless loop (5 cards × 3 = 15, loop resets after first 5)
   const tripled = [...TEAM_MEMBERS, ...TEAM_MEMBERS, ...TEAM_MEMBERS];
 
   return (
@@ -171,11 +156,11 @@ export default function Team() {
       <style>{`
         @keyframes teamScrollRight {
           0%   { transform: translateX(0); }
-          100% { transform: translateX(calc(-560px * 10 - 1.5rem * 10)); }
+          100% { transform: translateX(calc(-220px * 10 - 1.25rem * 10)); }
         }
         .team-track {
           display: flex;
-          gap: 1.5rem;
+          gap: 1.25rem;
           animation: teamScrollRight 55s linear infinite;
           width: max-content;
         }
@@ -189,7 +174,7 @@ export default function Team() {
         }
       `}</style>
 
-      {/* Section header — padded separately since section has no horizontal padding */}
+      {/* Header */}
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <h2
@@ -204,19 +189,13 @@ export default function Team() {
           >
             Our Leadership Team
           </h2>
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "#546e7a",
-              margin: 0,
-            }}
-          >
+          <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#546e7a", margin: 0 }}>
             Industry experts driving innovation
           </p>
         </div>
       </div>
 
-      {/* Full-width marquee */}
+      {/* Horizontal marquee */}
       <div className="team-marquee">
         <div className="team-track">
           {tripled.map((m, i) => (
