@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TEAM_MEMBERS } from "../constants/data";
 import {
   PHOTO_SUNIL,
@@ -25,6 +26,8 @@ const PHOTOS: Record<string, string> = {
   vm:        PHOTO_VM,
 };
 
+const CARDS_PER_PAGE = 4;
+
 function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
   const photo = PHOTOS[member.id];
 
@@ -34,11 +37,12 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
         background: "linear-gradient(160deg, #0d1f3c, #0F2040)",
         borderRadius: "14px",
         border: "1px solid rgba(30,111,165,0.2)",
-        width: "220px",
-        flexShrink: 0,
         overflow: "hidden",
         transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
         textAlign: "center",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,107,43,0.4)";
@@ -51,13 +55,14 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
         (e.currentTarget as HTMLElement).style.transform = "none";
       }}
     >
-      {/* Image — full width, square crop */}
+      {/* Image — full width, clean crop, NO fade mask */}
       <div
         style={{
           width: "100%",
-          height: "200px",
+          aspectRatio: "1 / 1",
           overflow: "hidden",
           background: "linear-gradient(135deg, #1E6FA5, #0A1628)",
+          flexShrink: 0,
         }}
       >
         {photo ? (
@@ -91,54 +96,61 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
         )}
       </div>
 
-      {/* Details */}
-      <div style={{ padding: "1.1rem 1rem 1.25rem" }}>
-        {/* Name */}
+      {/* Details — flex column, designation area has a reserved 2-line height
+          so cards with 1-line vs 2-line titles still end at the same total height */}
+      <div
+        style={{
+          padding: "1.5rem 1.25rem 1.75rem",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <h3
           style={{
             fontFamily: "'Rajdhani', sans-serif",
             fontWeight: 700,
-            fontSize: "1rem",
+            fontSize: "1.3rem",
             color: "#fff",
-            margin: "0 0 0.3rem",
+            margin: "0 0 0.4rem",
             lineHeight: 1.2,
           }}
         >
           {member.name}
         </h3>
 
-        {/* Experience */}
         <div
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "1.1rem",
+            fontSize: "1.4rem",
             color: "#FF6B2B",
             letterSpacing: "0.05em",
-            marginBottom: "0.35rem",
+            marginBottom: "0.5rem",
           }}
         >
           {member.experience}
         </div>
 
-        {/* Divider */}
         <div
           style={{
-            width: "32px",
+            width: "40px",
             height: "2px",
             background: "linear-gradient(to right, #FF6B2B, #1E6FA5)",
             borderRadius: "2px",
-            margin: "0.4rem auto",
+            margin: "0.5rem auto",
           }}
         />
 
-        {/* Designation */}
         <div
           style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: "0.75rem",
+            fontSize: "0.85rem",
             color: "#B0BEC5",
             lineHeight: 1.4,
-            marginTop: "0.35rem",
+            minHeight: "2.4em", // reserves space for 2 lines regardless of actual line count
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
           }}
         >
           {member.title}
@@ -149,33 +161,53 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
 }
 
 export default function Team() {
-  const tripled = [...TEAM_MEMBERS, ...TEAM_MEMBERS, ...TEAM_MEMBERS];
+  const [page, setPage] = useState(0);
+  const totalPages = Math.ceil(TEAM_MEMBERS.length / CARDS_PER_PAGE);
+
+  const goPrev = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const goNext = () => setPage((p) => (p + 1) % totalPages);
+
+  const visible = TEAM_MEMBERS.slice(
+    page * CARDS_PER_PAGE,
+    page * CARDS_PER_PAGE + CARDS_PER_PAGE
+  );
+
+  const edgeBtnStyle: React.CSSProperties = {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    width: "44px",
+    height: "44px",
+    borderRadius: "50%",
+    background: "rgba(10,22,40,0.25)",
+    border: "1px solid rgba(10,22,40,0.15)",
+    color: "rgba(10,22,40,0.55)",
+    fontSize: "1.1rem",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0,
+    backdropFilter: "blur(4px)",
+    transition: "opacity 0.25s ease, background 0.2s, color 0.2s, border-color 0.2s",
+    zIndex: 5,
+  };
 
   return (
-    <section id="team" style={{ padding: "6rem 0", background: "#D6EAF8" }}>
+    <section id="team" style={{ padding: "6rem 2rem", background: "#D6EAF8" }}>
       <style>{`
-        @keyframes teamScrollRight {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(calc(-220px * 10 - 1.25rem * 10)); }
-        }
-        .team-track {
-          display: flex;
-          gap: 1.25rem;
-          animation: teamScrollRight 55s linear infinite;
-          width: max-content;
-        }
-        .team-marquee:hover .team-track {
-          animation-play-state: paused !important;
-        }
-        .team-marquee {
-          overflow: hidden;
-          mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+        /* Arrow only reveals when hovering its own card (first/last), not the whole row */
+        .team-card-first:hover .team-arrow-left { opacity: 1 !important; }
+        .team-card-last:hover .team-arrow-right { opacity: 1 !important; }
+        .team-arrow-left:hover, .team-arrow-right:hover {
+          background: rgba(255,107,43,0.16) !important;
+          border-color: rgba(255,107,43,0.4) !important;
+          color: #FF6B2B !important;
         }
       `}</style>
 
-      {/* Header */}
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
+      <div style={{ maxWidth: "1320px", margin: "0 auto" }}>
+        {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <h2
             style={{
@@ -193,13 +225,88 @@ export default function Team() {
             Industry experts driving innovation
           </p>
         </div>
-      </div>
 
-      {/* Horizontal marquee */}
-      <div className="team-marquee">
-        <div className="team-track">
-          {tripled.map((m, i) => (
-            <MemberCard key={i} member={m} />
+        {/* Cards row — fixed card width, centered, equal height via flex stretch */}
+        <div
+          key={page}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "stretch",
+            gap: "1.5rem",
+            animation: "fadeIn 0.35s ease",
+          }}
+        >
+          {visible.map((m, i) => {
+            const isFirst = i === 0;
+            const isLast = i === visible.length - 1;
+            const edgeClass = isFirst ? "team-card-first" : isLast ? "team-card-last" : "";
+
+            return (
+              <div
+                key={m.id}
+                className={edgeClass}
+                style={{
+                  width: "270px",
+                  flexShrink: 0,
+                  position: "relative",
+                }}
+              >
+                <MemberCard member={m} />
+
+                {/* Prev arrow — only rendered on the leftmost card, hover-triggered by that card alone */}
+                {isFirst && (
+                  <button
+                    className="team-arrow-left"
+                    onClick={goPrev}
+                    style={{ ...edgeBtnStyle, left: "-22px" }}
+                    aria-label="Previous team members"
+                  >
+                    ←
+                  </button>
+                )}
+
+                {/* Next arrow — only rendered on the rightmost card, hover-triggered by that card alone */}
+                {isLast && (
+                  <button
+                    className="team-arrow-right"
+                    onClick={goNext}
+                    style={{ ...edgeBtnStyle, right: "-22px" }}
+                    aria-label="Next team members"
+                  >
+                    →
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Page dots */}
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i)}
+              style={{
+                width: i === page ? "24px" : "8px",
+                height: "8px",
+                borderRadius: "4px",
+                background: i === page ? "#1E6FA5" : "rgba(10,22,40,0.18)",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                transition: "all 0.3s",
+              }}
+            />
           ))}
         </div>
       </div>

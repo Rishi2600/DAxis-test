@@ -45,7 +45,7 @@ export default function Industries() {
         }}
       />
 
-      {/* Faded background image — same as active card's image, large & subtle */}
+      {/* Faded background image — same as active card's image, large & visible-but-subtle */}
       <div
         style={{
           position: "absolute",
@@ -53,8 +53,8 @@ export default function Industries() {
           backgroundImage: `url(${INDUSTRY_IMAGES[active]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          opacity: 0.08,
-          transition: "opacity 0.6s ease",
+          opacity: 0.34,
+          transition: "opacity 0.6s ease, background-image 0.6s ease",
           pointerEvents: "none",
         }}
       />
@@ -64,7 +64,7 @@ export default function Industries() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(15,32,64,0.9) 100%)",
+            "linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(15,32,64,0.8) 100%)",
           pointerEvents: "none",
         }}
       />
