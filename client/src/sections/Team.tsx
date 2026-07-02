@@ -155,6 +155,23 @@ function MemberCard({ member }: { member: typeof TEAM_MEMBERS[0] }) {
         >
           {member.title}
         </div>
+
+        {/* Short description — reserved 3-line height so cards stay aligned
+            regardless of how long each person's description is */}
+        <div
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "0.78rem",
+            color: "#8fa3b8",
+            lineHeight: 1.5,
+            marginTop: "0.6rem",
+            paddingTop: "0.6rem",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            minHeight: "3.6em", // reserves space for 3 lines
+          }}
+        >
+          {member.description}
+        </div>
       </div>
     </div>
   );
@@ -191,6 +208,7 @@ export default function Team() {
     backdropFilter: "blur(4px)",
     transition: "opacity 0.25s ease, background 0.2s, color 0.2s, border-color 0.2s",
     zIndex: 5,
+    outline: "none",
   };
 
   return (

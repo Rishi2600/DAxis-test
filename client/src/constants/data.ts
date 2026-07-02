@@ -166,6 +166,7 @@ export const TEAM_MEMBERS = [
     name: "Sunil Sharma",
     title: "Lead Consultant",
     experience: "20+ Years",
+    description: "Multi-disciplinary engineering design, GIS mapping and project management across Oil & Gas, Power and Infrastructure.",
     linkedin: null,
   },
   {
@@ -173,6 +174,7 @@ export const TEAM_MEMBERS = [
     name: "Himadri Chakraborty",
     title: "General Manager — Electrical, C&I Engineering",
     experience: "20+ Years",
+    description: "Senior engineering leader specialising in Electrical, Control & Instrumentation systems.",
     linkedin: null,
   },
   {
@@ -180,6 +182,7 @@ export const TEAM_MEMBERS = [
     name: "Sompal Singh",
     title: "CAD Designer & Trainer",
     experience: "10+ Years",
+    description: "AutoCAD 2D & 3D drafting specialist, also trains mechanical engineering students.",
     linkedin: null,
   },
   {
@@ -187,6 +190,7 @@ export const TEAM_MEMBERS = [
     name: "Mukesh Kala",
     title: "Pipeline Design & Development",
     experience: "15+ Years",
+    description: "Specialist in pipelining, design and development across industrial projects.",
     linkedin: null,
   },
   {
@@ -194,6 +198,7 @@ export const TEAM_MEMBERS = [
     name: "HP Roy",
     title: "Oil & Gas Expert",
     experience: "20+ Years",
+    description: "Deep expertise across upstream and downstream Oil & Gas project execution.",
     linkedin: null,
   },
   {
@@ -201,6 +206,7 @@ export const TEAM_MEMBERS = [
     name: "Jagdish Yadav",
     title: "Sr. Manager — Electrical & Instrumentation",
     experience: "20+ Years",
+    description: "Leads Electrical & Instrumentation design for oil and gas refineries.",
     linkedin: null,
   },
   {
@@ -208,6 +214,7 @@ export const TEAM_MEMBERS = [
     name: "Sanjiv Sharma",
     title: "Contract Manager",
     experience: "15+ Years",
+    description: "Manages engineering contracts and agreements across infrastructure projects.",
     linkedin: null,
   },
   {
@@ -215,6 +222,7 @@ export const TEAM_MEMBERS = [
     name: "Gaurav Bajaj",
     title: "P.Eng — Project Manager",
     experience: "17+ Years",
+    description: "Delivers complex infrastructure and industrial projects across energy and transportation.",
     linkedin: null,
   },
   {
@@ -222,6 +230,7 @@ export const TEAM_MEMBERS = [
     name: "Muneshwer Sharma",
     title: "Plant Layout & Piping Professional",
     experience: "25+ Years",
+    description: "Plant layout and piping expert for chemical, petrochemical and power plant projects.",
     linkedin: null,
   },
   {
@@ -229,6 +238,7 @@ export const TEAM_MEMBERS = [
     name: "VM Madhusoodanan",
     title: "Sr. Lead Piping Designer",
     experience: "28+ Years",
+    description: "Detailed piping design for refinery and offshore/onshore Oil & Gas projects.",
     linkedin: null,
   },
 ];

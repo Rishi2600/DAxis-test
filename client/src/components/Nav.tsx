@@ -314,19 +314,6 @@ export default function Nav() {
                 (e.currentTarget as HTMLElement).style.paddingLeft = "1.5rem";
               }}
             >
-              {/* Index number */}
-              <span
-                style={{
-                  fontFamily: "'Space Mono', monospace",
-                  fontSize: "0.65rem",
-                  color: "#FF6B2B",
-                  opacity: 0.7,
-                  flexShrink: 0,
-                  width: "20px",
-                }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
               {label}
             </button>
           ))}

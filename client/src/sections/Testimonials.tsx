@@ -46,8 +46,12 @@ export default function Testimonials() {
     <section style={{ padding: "6rem 2rem", background: "#D6EAF8" }}>
       <style>{`
         .testimonial-hover-zone { position: relative; }
-        .testimonial-hover-zone:hover .testimonial-arrow { opacity: 1; }
-        .testimonial-arrow:hover { background: #1E6FA5 !important; color: #fff !important; }
+        .testimonial-hover-zone:hover .testimonial-arrow { opacity: 1 !important; }
+        .testimonial-arrow:hover {
+          background: rgba(255,107,43,0.16) !important;
+          border-color: rgba(255,107,43,0.4) !important;
+          color: #FF6B2B !important;
+        }
         @media (max-width: 700px) {
           .testimonial-arrow { display: none !important; }
         }
@@ -76,24 +80,25 @@ export default function Testimonials() {
             onClick={goPrev}
             style={{
               position: "absolute",
-              left: "-24px",
+              left: "-22px",
               top: "50%",
               transform: "translateY(-50%)",
-              width: "48px",
-              height: "48px",
+              width: "44px",
+              height: "44px",
               borderRadius: "50%",
-              background: "#EBF3FA",
-              border: "1px solid rgba(10,22,40,0.1)",
-              color: "#0A1628",
-              fontSize: "1.2rem",
+              background: "rgba(10,22,40,0.25)",
+              border: "1px solid rgba(10,22,40,0.15)",
+              color: "rgba(10,22,40,0.55)",
+              fontSize: "1.1rem",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               opacity: 0,
-              transition: "opacity 0.25s ease, background 0.2s, color 0.2s",
+              backdropFilter: "blur(4px)",
+              transition: "opacity 0.25s ease, background 0.2s, color 0.2s, border-color 0.2s",
               zIndex: 5,
-              boxShadow: "0 4px 16px rgba(10,22,40,0.15)",
+              outline: "none",
             }}
             aria-label="Previous testimonial"
           >
@@ -189,21 +194,22 @@ export default function Testimonials() {
               right: "-24px",
               top: "50%",
               transform: "translateY(-50%)",
-              width: "48px",
-              height: "48px",
+              width: "44px",
+              height: "44px",
               borderRadius: "50%",
-              background: "#EBF3FA",
-              border: "1px solid rgba(10,22,40,0.1)",
-              color: "#0A1628",
-              fontSize: "1.2rem",
+              background: "rgba(10,22,40,0.25)",
+              border: "1px solid rgba(10,22,40,0.15)",
+              color: "rgba(10,22,40,0.55)",
+              fontSize: "1.1rem",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               opacity: 0,
-              transition: "opacity 0.25s ease, background 0.2s, color 0.2s",
+              backdropFilter: "blur(4px)",
+              transition: "opacity 0.25s ease, background 0.2s, color 0.2s, border-color 0.2s",
               zIndex: 5,
-              boxShadow: "0 4px 16px rgba(10,22,40,0.15)",
+              outline: "none",
             }}
             aria-label="Next testimonial"
           >
